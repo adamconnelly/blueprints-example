@@ -40,16 +40,13 @@ stack:
   # The VCS settings tell us where the stack will get its code from
   vcs:
     branch: main
-    repository: "demo"
+    repository: "blueprints-example"
     
-    # In this example we're using the "GitHub (custom App) integration. For legacy reasons it's
-    # called GITHUB_ENTERPRISE. If you are using our managed GitHub integration this can be
-    # changed to just GITHUB and the `namespace` property can be ommitted.
+    # In this example we're using the managed GitHub integration.
     #
-    # The other options are GITLAB, BITBUCKET_DATACENTER, BITBUCKET_CLOUD and AZURE_DEVOPS, all
-    # of which require the `namespace` property.
-    provider: GITHUB_ENTERPRISE
-    namespace: "spacelift-io-examples"
+    # The other options are GITHUB_ENTERPRISE (this is "GitHub (custom App)") GITLAB, BITBUCKET_DATACENTER,
+    # BITBUCKET_CLOUD and AZURE_DEVOPS, all of which require the `namespace` property to be provided.
+    provider: GITHUB
 
     # The project root points at the folder containing the stack definition for our blueprint
     project_root: "blueprints/developer-environment"
@@ -80,14 +77,6 @@ resource "spacelift_blueprint" "feature-environment" {
   state       = "PUBLISHED"
 
   template = <<EOF
-# Check the documentation for more information: https://docs.spacelift.io/concepts/blueprint/index.html
-#
-# Tip: This code-editor has the same engine as VS Code (Monaco).
-# Right-click, then click 'Command Palette' to see a list of available commands.
-#
-# Examples:
-#
-# 1. Basic stack configuration with custom stack name, description, and repository
 inputs:
   - id: environment_name
     name: "Environment name"
@@ -120,9 +109,8 @@ stack:
     - "feature_environments/$${{ inputs.environment_name }}"
   vcs:
     branch: main
-    repository: "demo"
-    provider: GITHUB_ENTERPRISE
-    namespace: "spacelift-io-examples"
+    repository: "blueprints-example"
+    provider: GITHUB
     project_root: "blueprints/feature-environment"
   vendor:
     terraform:
