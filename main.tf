@@ -79,7 +79,7 @@ resource "spacelift_blueprint" "feature-environment" {
   template = <<EOF
 inputs:
   - id: environment_name
-    name: "Environment name"
+    name: "The Environment name"
   - id: instance_size
     name: "Instance Size"
     type: select
